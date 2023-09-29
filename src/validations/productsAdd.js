@@ -3,13 +3,13 @@ const { check } = require('express-validator');
 module.exports = [
     check("name")
         .notEmpty()
-        .withMessage("Deberá colocar como minimo 2 letras"),
+        .withMessage("Deberá colocar el nombre del producto"),
 
     check("price")
         .notEmpty()
-        .withMessage("Deberá colocar como minimo 2 letras"),
+        .withMessage("Deberá colocar el precio del producto"),
 
     check("description")
         .notEmpty()
-        .withMessage("Debe tener entre 6 y 12 caracteres")
+        .withMessage("Debe tener una descripción")
 ]

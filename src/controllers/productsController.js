@@ -33,6 +33,7 @@ const controller = {
 				})
 			}).catch(error => console.log(error))
 	},
+	
 	create: (req, res) => {
 		db.Category.findAll()
 			.then(categories => {
@@ -48,6 +49,7 @@ const controller = {
 
 		const errors = validationResult(req)
 
+		console.log("body", req.body);
 		if (errors.isEmpty()) {
 			const { name, price, description, categoryId, discount, image} = req.body;
 
@@ -69,10 +71,16 @@ const controller = {
 				existsSync('./public/images/' + req.file.filename) &&
 				unlinkSync('./public/images/' + req.file.filename)
 			}
-			return res.render("product-create-form", {
-				errors: errors.mapped(),
-				old: req.body
-			});
+			db.Category.findAll()
+			.then(categories => {
+				console.log(categories);
+				return res.render("product-create-form", {
+					errors: errors.mapped(),
+					old: req.body,
+					categories
+				});
+			})
+			.catch(error => console.log(error))			
 		}
 	},
 
@@ -88,8 +96,8 @@ const controller = {
 				})
 			})
 			.catch(error => console.log(error))
-
 	},
+
 	update: (req, res) => {
 
 		const { name, price, description, categoryId, discount, image } = req.body;
