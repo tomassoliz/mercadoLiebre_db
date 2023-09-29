@@ -1,13 +1,7 @@
 /* base de datos */
 
 const db = require('../database/models')
-const Op = db.Sequelize.Op
-
-const fs = require('fs');
-const path = require('path');
-
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+const { Op } = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -42,7 +36,6 @@ const controller = {
 	},
 
 	search: (req, res) => {
-		const keywords = req.query.keywords
 
 		// const results = db.Product.findAll({
 		// 	where: {
@@ -51,6 +44,8 @@ const controller = {
 		// 		}
 		// 	}
 		// })
+
+		const keywords = req.query.keywords.toLowerCase();
 
 		db.Product.findAll({
 			where: {
@@ -70,11 +65,7 @@ const controller = {
 
 			}
 		})
-
-		// const results = products.filter(product => product.name.toLowerCase().includes(keywords.toLowerCase()))
-
-		Promise.all([results])
-			.then(([results]) => {
+			.then((results) => {
 				return res.render('results', {
 					results,
 					keywords,

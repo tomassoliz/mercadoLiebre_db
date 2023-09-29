@@ -49,7 +49,7 @@ const controller = {
 		const errors = validationResult(req)
 
 		if (errors.isEmpty()) {
-			const { name, price, description, categoryId, discount, image } = req.body;
+			const { name, price, description, categoryId, discount, image} = req.body;
 
 			db.Product.create({
 				name: name.trim(),
@@ -69,7 +69,7 @@ const controller = {
 				existsSync('./public/images/' + req.file.filename) &&
 				unlinkSync('./public/images/' + req.file.filename)
 			}
-			return res.render("/products/create", {
+			return res.render("product-create-form", {
 				errors: errors.mapped(),
 				old: req.body
 			});
