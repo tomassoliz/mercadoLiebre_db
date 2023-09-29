@@ -44,11 +44,30 @@ const controller = {
 	search: (req, res) => {
 		const keywords = req.query.keywords
 
-		const results = db.Product.findAll({
+		// const results = db.Product.findAll({
+		// 	where: {
+		// 		name: {
+		// 			[Op.like]: `%${keywords}%`
+		// 		}
+		// 	}
+		// })
+
+		db.Product.findAll({
 			where: {
-				name: {
-					[Op.like]: `%${keywords}%`
-				}
+				[Op.or]: [
+					{
+						name: {
+							[Op.substring]: keywords
+						}
+					},
+					{
+						description: {
+							[Op.substring]: keywords
+						}
+					}
+
+				]
+
 			}
 		})
 

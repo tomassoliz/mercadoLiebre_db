@@ -153,12 +153,12 @@
       "image": null
    },
    {
-      "id": 19,
-      "name": "Smart Tv 45\"",
-      "price": 10020,
-      "discount": 13,
-      "category": "in-sale",
-      "description": "Algo que ver",
+      "id": 20,
+      "name": "",
+      "price": 0,
+      "discount": 0,
+      "category": "",
+      "description": "",
       "image": null
    }
 ]
